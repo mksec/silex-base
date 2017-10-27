@@ -1,0 +1,18 @@
+{
+    "name": "mksec/silex-base",
+    "description": "Base application for Silex",
+    "homepage": "https://github.com/mksec/silex-base",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Haase",
+            "email": "ahaase@mksec.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.7"
+    }
+}
