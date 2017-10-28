@@ -24,7 +24,7 @@
 # The test target will be used to run all tests on this project. It will link
 # the individual test cases defined below.
 .PHONY: test
-test: test-php-cs-fixer
+test: test-php-cs-fixer test-phpunit
 
 # Check the source code for following the code standard defined in the
 # PHP-CS-Fixer configuration. This doesn't cover all conventions (e.g. line
@@ -37,4 +37,22 @@ test-php-cs-fixer:
 	    --dry-run                \
 	    --stop-on-violation      \
 	    --using-cache=no         \
-	    .php_cs.dist
+	    src/ tests/ .php_cs.dist
+
+# Run all test-cases with phpunit. Coverage data will be stored in the
+# coverage.xml file.
+test-phpunit:
+	@vendor/bin/phpunit                   \
+	    --configuration tests/phpunit.xml \
+	    --coverage-clover=coverage.xml
+
+
+# Generate the documentation for the whole project (all files in src sub-
+# directory). The generated documentation (and cache files) will be stored in
+# the doc subdirectory of the build path.
+#
+# NOTICE: Developers need to install phpdoc by the platform-dependent package
+#         manager due dependency conflicts with Silex's dependencies.
+.PHONY: doc
+doc:
+	phpdoc -t build/doc/ -d src/ -d tests/ -p

@@ -35,5 +35,17 @@ jobs:
     # coding standard.
     - stage: compiliance
       env: FORMAT
-      php: '5.6'
+      php: '7.0'
       script: make test-php-cs-fixer
+
+    - stage: test
+      php: '7.0'
+      script: make test-phpunit
+    - php: '7.1'
+      script: make test-phpunit
+
+
+# Upload coverage data after successfull runs. This will affect the test-jobs
+# only, as the compiliance-jobs do not output any coverage data.
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

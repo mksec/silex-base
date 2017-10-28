@@ -10,9 +10,22 @@
         }
     ],
     "require": {
-        "php": ">=5.4"
+        "php": ">=7.0",
+        "silex/silex": "~2.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.7"
+        "friendsofphp/php-cs-fixer": "^2.7",
+        "phpunit/phpunit": "^6.4"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "SilexBase\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SilexBase\\Tests\\" : "tests/"
+        }
     }
 }

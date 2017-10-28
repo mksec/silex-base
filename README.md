@@ -1,5 +1,7 @@
 # Silex Base-Application
 
+[![](https://img.shields.io/travis/mksec/silex-base/master.svg?style=flat-square)](https://travis-ci.org/mksec/silex-base)
+[![](https://img.shields.io/codecov/c/github/mksec/silex-base.svg?style=flat-square)](https://codecov.io/github/mksec/silex-base?branch=master)
 [![](https://img.shields.io/github/issues-raw/mksec/silex-base.svg?style=flat-square)](https://github.com/mksec/silex-base/issues)
 [![](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
@@ -18,6 +20,14 @@ This repository provides some classes providing the basic infrastructure, that
 may be used as base classes for the applications to build, making them more
 simple, as common code doesn't need to be repeated.
 
+
+## Classes
+
+* `BaseApplication`
+
+  The `BaseApplication` class is a simple Silex Application with the Error- and
+  ExceptionHandler registered. It may be used for simple applications without an
+  UI (e.g. APIs).
 
 ## License
 
