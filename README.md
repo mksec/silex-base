@@ -35,6 +35,15 @@ simple, as common code doesn't need to be repeated.
   serivce-providers registered. It also uses the `CacheTrait` to use an
   application-wide cache path, which may be set in the `app.cache` path.
 
+
+## Providers
+
+* `ThemeServiceProvider`
+
+  The `ThemeServiceProvider` may be used to dynamically determine the paths for
+  Twig views and assets.
+
+
 ## License
 
 This project is licensed under the [MIT license](LICENSE).
