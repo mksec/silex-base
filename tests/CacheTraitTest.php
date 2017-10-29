@@ -39,14 +39,10 @@ class CacheAwareApplication extends Application
 }
 
 /**
- * Test the `BaseApplication`.
- *
- * The testcases defined in this class will check the `BaseApplication`.
- * However, the functionality of Symfony's Error- and ExceptionHandler can't be
- * tested by phpunit.
+ * Test the functions of the `CacheTrait`.
  *
  *
- * @see \SilexBase\BaseApplication
+ * @see \SilexBase\Application\CacheTrait
  */
 class CacheTraitTest extends TestCase
 {
