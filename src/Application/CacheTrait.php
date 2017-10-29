@@ -45,7 +45,7 @@ trait CacheTrait
      */
     public function cachePath(string $identifier)
     {
-        if (isset($this['app.cache'])) {
+        if (isset($this['app.cache']) && $this['app.cache']) {
             return rtrim($this['app.cache'], '/').'/'.$identifier;
         }
     }

@@ -72,6 +72,25 @@ class CacheTraitTest extends TestCase
     }
 
     /**
+     * Check if `cachePath` returns `null`, if the cache is set to `null`.
+     */
+    public function testNoCacheIfNull()
+    {
+        $this->app['app.cache'] = null;
+        $this->assertNull($this->app->cachePath('xyz'));
+    }
+
+    /**
+     * Check if `cachePath` returns `null`, if the cache is set to an empty
+     * string.
+     */
+    public function testNoCacheIfEmpty()
+    {
+        $this->app['app.cache'] = '';
+        $this->assertNull($this->app->cachePath('xyz'));
+    }
+
+    /**
      * Check if `cachePath` returns a valid cache path for a given identifier.
      */
     public function testCachePath()
