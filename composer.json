@@ -13,9 +13,18 @@
         "php": ">=7.0",
         "silex/silex": "~2.0"
     },
+    "suggest": {
+        "symfony/asset": "For using the BaseUiApplication",
+        "symfony/twig-bridge": "For using the BaseUiApplication",
+        "twig/twig": "For using the BaseUiApplication"
+    },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.7",
-        "phpunit/phpunit": "^6.4"
+        "phpunit/phpunit": "^6.4",
+
+        "symfony/asset": "*",
+        "symfony/twig-bridge": "*",
+        "twig/twig": "*"
     },
 
     "autoload": {

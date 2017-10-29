@@ -29,6 +29,12 @@ simple, as common code doesn't need to be repeated.
   ExceptionHandler registered. It may be used for simple applications without an
   UI (e.g. APIs).
 
+* `BaseUiApplication`
+
+  The `BaseUiApplication` extends the `BaseApplication` with the Twig and Asset
+  serivce-providers registered. It also uses the `CacheTrait` to use an
+  application-wide cache path, which may be set in the `app.cache` path.
+
 ## License
 
 This project is licensed under the [MIT license](LICENSE).
