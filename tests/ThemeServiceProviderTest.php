@@ -87,4 +87,42 @@ class ThemeServiceProviderTest extends TestCase
         $this->app['theme.path'] = __DIR__;
         $this->assertEquals($this->app['assets.base_path'], __DIR__.'/foo');
     }
+
+    /**
+     * Check the named packages for assets (if no file is present).
+     */
+    public function testAssetNamedPackagesEmpty()
+    {
+        $this->app['theme'] = 'unknown';
+        $this->app['theme.path'] = __DIR__;
+        $this->assertEmpty($this->app['assets.named_packages']);
+    }
+
+    /**
+     * Check the named packages for assets.
+     */
+    public function testAssetNamedPackages()
+    {
+        $this->app['theme'] = 'testTheme';
+        $this->app['theme.path'] = __DIR__;
+        $this->assertArrayHasKey('pkg1', $this->app['assets.named_packages']);
+    }
+
+    /**
+     * Check the named packages for assets (if the packages are extended).
+     */
+    public function testAssetNamedPackagesExtended()
+    {
+        $this->app['theme'] = 'testTheme';
+        $this->app['theme.path'] = __DIR__;
+
+        $this->app->extend('assets.named_packages', function (array $packages) {
+            $packages['pkg5'] = [];
+
+            return $packages;
+        });
+
+        $this->assertArrayHasKey('pkg1', $this->app['assets.named_packages']);
+        $this->assertArrayHasKey('pkg5', $this->app['assets.named_packages']);
+    }
 }

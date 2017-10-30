@@ -35,6 +35,12 @@ use Pimple\ServiceProviderInterface;
  * This provider gives applications the ability to dynamically switch the theme
  * to be used by setting the `theme` key. Themes will be searched inside the
  * `theme.path` path.
+ *
+ * A theme may provide a file named `assets.php` in its root to provide an array
+ * of named packages used by the theme and default values (e.g. the CDN
+ * providing the asset). Users may override the packages by using `extend()` on
+ * the `assets.named_packages` key to change the asset's path (e.g. using a
+ * local copy instead of a CDN) or add additional packages.
  */
 class ThemeServiceProvider implements ServiceProviderInterface
 {
@@ -67,9 +73,15 @@ class ThemeServiceProvider implements ServiceProviderInterface
         };
 
         /* Overload the 'assets.base_path' with a closure to get the theme's
-         * root path. */
+         * root path. The contents of the 'assets.php' file in the theme's root
+         * will be used as 'assets.named_packages' if available. */
         $app['assets.base_path'] = function (Container $app): string {
             return self::get_path($app);
+        };
+        $app['assets.named_packages'] = function (Container $app): array {
+            $file = self::get_path($app).'/assets.php';
+
+            return file_exists($file) ? require $file : [];
         };
     }
 }
