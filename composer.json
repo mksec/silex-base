@@ -16,15 +16,18 @@
     "suggest": {
         "symfony/asset": "For using the BaseUiApplication",
         "symfony/twig-bridge": "For using the BaseUiApplication",
-        "twig/twig": "For using the BaseUiApplication"
+        "twig/twig": "For using the BaseUiApplication",
+        "silex/web-profiler": "For using the Web Profiler in BaseUiApplication"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.7",
         "phpunit/phpunit": "^6.4",
+        "symfony/browser-kit": "*",
 
         "symfony/asset": "*",
         "symfony/twig-bridge": "*",
-        "twig/twig": "*"
+        "twig/twig": "*",
+        "silex/web-profiler": "^2.0"
     },
 
     "autoload": {

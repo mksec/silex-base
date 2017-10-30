@@ -20,7 +20,7 @@
     <whitelist>
       <directory>..</directory>
       <exclude>
-        <directory>.</directory>
+        <directory>../cache</directory>
         <directory>../vendor</directory>
       </exclude>
     </whitelist>

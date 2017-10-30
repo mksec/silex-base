@@ -51,6 +51,21 @@ classes.
   serivce-providers registered. It also uses the `CacheTrait` to use an
   application-wide cache path, which may be set in the `app.cache` path.
 
+  To use this class, you'll need to add additional dependencies:
+  ```
+  composer require symfony/asset symfony/twig-bridge twig/twig
+  ```
+  The [Web Profiler](https://github.com/silexphp/Silex-WebProfiler) may be
+  activated with the `enableProfiler()` method **after** the other providers
+  have been registered. You'll also need to add additional development
+  dependencies:
+  ```
+  composer require --dev 'silex/web-profiler:^2.0'
+  ```
+  *Additional dependencies may be required depending on other providers you're
+  using. See the [README](https://github.com/silexphp/Silex-WebProfiler) for the
+  Silex Web Profiler for further information.*
+
 #### Providers
 
 * `ThemeServiceProvider`

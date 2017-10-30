@@ -28,7 +28,10 @@ namespace SilexBase;
 
 use Silex\Application\TwigTrait;
 use Silex\Provider\AssetServiceProvider;
+use Silex\Provider\HttpFragmentServiceProvider;
+use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\WebProfilerServiceProvider;
 use SilexBase\Application\CacheTrait;
 
 /**
@@ -80,6 +83,46 @@ class BaseUiApplication extends BaseApplication
              * modified configuration. */
             return $factory($app);
         };
+    }
+
+    /**
+     * Enable the Silex Web Profiler for this application.
+     *
+     * NOTICE: This method MUST NOT be called before all providers have been
+     *         registered.
+     *
+     * NOTICE: The Web Profiler is only active in develop mode.
+     *
+     *
+     * @return self
+     */
+    public function enableProfiler(): self
+    {
+        /* Register the HttpFragmentServiceProvider, if it isn't already
+         * registered. */
+        if (!isset($this['fragment.handler'])) {
+            $this->register(new HttpFragmentServiceProvider());
+        }
+
+        /* Register the ServiceControllerServiceProvider, if it isn't already
+         * registered. As this provider doesn't provide any services, but just
+         * extends the resolver service, the providers array needs to be checked
+         * instead of checking the services. */
+        if (empty(array_filter($this->providers, function ($provider) {
+            return $provider instanceof ServiceControllerServiceProvider;
+        }))) {
+            $this->register(new ServiceControllerServiceProvider());
+        }
+
+        /* Register the Web Profiler. Its cache will be stored in the
+         * application-wide cache (in the 'profiler' subdirectory). */
+        $this->register(new WebProfilerServiceProvider(), [
+            'profiler.cache_dir' => function () {
+                return $this->cachePath('profiler');
+            },
+        ]);
+
+        return $this;
     }
 
     /**
