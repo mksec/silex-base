@@ -49,8 +49,10 @@ class ThemeServiceProvider implements ServiceProviderInterface
      *
      * @return string the path for the selected theme
      */
-    private static function get_path(Container $app, string $path = ''): string
-    {
+    private static function get_path(
+        Container $app,
+        string $path = null
+    ): string {
         $base = rtrim($app['theme.path'], '/');
         $path = rtrim($path, '/');
 
