@@ -1,6 +1,6 @@
 {
     "name": "mksec/silex-base",
-    "description": "Base application for Silex",
+    "description": "Base classes for creating Silex applications",
     "homepage": "https://github.com/mksec/silex-base",
     "license": "MIT",
     "authors": [

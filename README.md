@@ -21,7 +21,23 @@ may be used as base classes for the applications to build, making them more
 simple, as common code doesn't need to be repeated.
 
 
-## Classes
+## Installation
+
+Simply add `mksec/silex-base` as a dependency for your project with composer:
+```
+composer require mksec/silex-base
+```
+
+
+## Usage
+
+Using the basic application classes is pretty easy: Just use one of the classes
+below instead of `\Silex\Application` and you are done. For specialized
+applications you may want to implement a class inheriting from one of the base
+classes.
+
+
+#### Classes
 
 * `BaseApplication`
 
@@ -35,13 +51,13 @@ simple, as common code doesn't need to be repeated.
   serivce-providers registered. It also uses the `CacheTrait` to use an
   application-wide cache path, which may be set in the `app.cache` path.
 
-
-## Providers
+#### Providers
 
 * `ThemeServiceProvider`
 
   The `ThemeServiceProvider` may be used to dynamically determine the paths for
-  Twig views and assets.
+  Twig views and assets. Although it is meant to be used with the
+  `BaseUiApplication`, it is compatible with a plain Silex Application.
 
 
 ## License
