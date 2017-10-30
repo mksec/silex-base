@@ -68,12 +68,10 @@ class BaseUiApplication extends BaseApplication
         $this['twig'] = function (BaseUiApplication $app) use ($factory) {
             /* The following default configuration will be used for Twig,
              * extending Silex's default configuration with a cache path
-             * depending on the application-wide cache and enabling exceptions
-             * on missing variables. */
+             * depending on the application-wide cache. */
             $app['twig.options'] = array_replace(
                 [
                     'cache' => $app->cachePath('twig') ?? false,
-                    'strict_variables' => true,
                 ],
                 $app['twig.options']
             );
