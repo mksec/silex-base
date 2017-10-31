@@ -66,6 +66,23 @@ classes.
   using. See the [README](https://github.com/silexphp/Silex-WebProfiler) for the
   Silex Web Profiler for further information.*
 
+There could be a lot more of sub-classes for any kind of Applications. However,
+this might be inefficient, as there're too many combinations of services for
+higher classes:
+
+* There're situtions to use the `MonologServiceProvider` in any kind of
+  application, so there's no sense to add extra classes just do get monolog in
+  all of them. It is easier to just register the `MonologServiceProvider` if
+  needed.
+* The same goes for the security components (`SecurityServiceProvider`,
+  `RememberMeServiceProvider`, `SessionServiceProvider`): Imagine an application
+  with stateless authentication - there's no sense to use the latter two here.
+* Interactive applications might use the `CsrfServiceProvider` and
+  `FormServiceProvider`. However, their dependencies highly depend on the final
+  application, i.e. if the default form templates will be used, the
+  `TranslationServiceProvider` is required, but for custom templates it might be
+  superfluous.
+
 #### Providers
 
 * `ThemeServiceProvider`
@@ -73,6 +90,17 @@ classes.
   The `ThemeServiceProvider` may be used to dynamically determine the paths for
   Twig views and assets. Although it is meant to be used with the
   `BaseUiApplication`, it is compatible with a plain Silex Application.
+
+
+## Contribute
+
+Everyone is welcome to contribute. Just fork this repository, make your changes
+*in an own branch* and send a pull-request for your changes. Please send only
+one change per pull-request.
+
+You found a bug? Please
+[file an issue](https://github.com/mksec/silex-base/issues/new) and include all
+information to reproduce the bug.
 
 
 ## License
