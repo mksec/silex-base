@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": "~7.0",
         "silex/silex": "~2.0"
     },
     "suggest": {
@@ -22,11 +22,11 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.7",
         "phpunit/phpunit": "^6.4",
-        "symfony/browser-kit": "*",
+        "symfony/browser-kit": "~2.8 || ^3.0",
 
-        "symfony/asset": "*",
-        "symfony/twig-bridge": "*",
-        "twig/twig": "*",
+        "symfony/asset": "~2.8 || ^3.0",
+        "symfony/twig-bridge": "~2.8 || ^3.0",
+        "twig/twig": "~1.28 || ^2.0",
         "silex/web-profiler": "^2.0"
     },
 
