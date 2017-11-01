@@ -91,6 +91,33 @@ higher classes:
   Twig views and assets. Although it is meant to be used with the
   `BaseUiApplication`, it is compatible with a plain Silex Application.
 
+  A theme *may* have a file named `assets.php` in its root to return an array of
+  named packages used (e.g. Bootstrap, jQuery, ...) in the template. One may
+  change this list easily by extending the `assets.named_packages` key of the
+  `$app` e.g. to switch the used CDN:
+  ```php
+  <?php
+
+  use SilexBase\BaseUiApplication;
+  use SilexBase\ThemeServiceProvider;
+
+  $app = new BaseUiApplication();
+  $app->register(new ThemeServiceProvider());
+  $app->extend('assets.named_packages', function (array $packages) {
+      // Switch the CDN domain.
+      $packages['bootstrap']['base_urls'] = ['example.org'];
+  });
+  ```
+
+  The theme may also provide a file named `assets.manifest.json` in its root to
+  specify versions of assets the theme owns *(not named packages!)*:
+  ```json
+  {
+    "css/main.css": "css/main.css?abcdef"
+  }
+  ```
+  *Notice: This feature was introduced in `symfony/assets` version 3.3!*
+
 
 ## Contribute
 

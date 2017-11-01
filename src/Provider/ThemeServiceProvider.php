@@ -76,9 +76,17 @@ class ThemeServiceProvider implements ServiceProviderInterface
 
         /* Overload the 'assets.base_path' with a closure to get the theme's
          * root path. The contents of the 'assets.php' file in the theme's root
-         * will be used as 'assets.named_packages' if available. */
+         * will be used as 'assets.named_packages' if available. In addition,
+         * the theme may provide a manifest file to set versions for its assets
+         * (useful if using web caches). */
         $app['assets.base_path'] = function (Container $app): string {
             return self::get_path($app);
+        };
+        $app['assets.json_manifest_path'] = function (Container $app) {
+            $file = self::get_path($app).'/assets.manifest.json';
+            if (file_exists($file)) {
+                return $file;
+            }
         };
         $app['assets.named_packages'] = function (Container $app): array {
             $file = self::get_path($app).'/assets.php';

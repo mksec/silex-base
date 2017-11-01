@@ -89,6 +89,27 @@ class ThemeServiceProviderTest extends TestCase
     }
 
     /**
+     * Check the manifest file to be used if theme has no manifest file.
+     */
+    public function testAssetNoManifest()
+    {
+        $this->assertEmpty($this->app['assets.json_manifest_path']);
+    }
+
+    /**
+     * Check the manifest file to be used if theme has a manifest file.
+     */
+    public function testAssetManifest()
+    {
+        $this->app['theme'] = 'testTheme';
+        $this->app['theme.path'] = __DIR__;
+        $this->assertEquals(
+            __DIR__.'/testTheme/assets.manifest.json',
+            $this->app['assets.json_manifest_path']
+        );
+    }
+
+    /**
      * Check the named packages for assets (if no file is present).
      */
     public function testAssetNamedPackagesEmpty()
