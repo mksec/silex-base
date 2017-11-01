@@ -39,5 +39,9 @@
         "psr-4": {
             "SilexBase\\Tests\\" : "tests/"
         }
-    }
+    },
+
+    "bin": [
+        "bin/asset-manifest"
+    ]
 }
