@@ -26,8 +26,8 @@
 
 namespace SilexBase\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Silex\Application;
+use Silex\WebTestCase;
 use SilexBase\Provider\ThemeServiceProvider;
 
 /**
@@ -36,20 +36,17 @@ use SilexBase\Provider\ThemeServiceProvider;
  *
  * @see \SilexBase\Provider\ThemeServiceProvider
  */
-class ThemeServiceProviderTest extends TestCase
+class ThemeServiceProviderTest extends WebTestCase
 {
-    /**
-     * Instance of a Silex application.
-     */
-    protected $app;
-
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function createApplication()
     {
-        $this->app = new Application();
-        $this->app->register(new ThemeServiceProvider());
+        $app = new Application();
+        $app->register(new ThemeServiceProvider());
+
+        return $app;
     }
 
     /**

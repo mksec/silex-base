@@ -26,8 +26,8 @@
 
 namespace SilexBase\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Silex\Application;
+use Silex\WebTestCase;
 use SilexBase\Application\CacheTrait;
 
 /**
@@ -44,19 +44,14 @@ class CacheAwareApplication extends Application
  *
  * @see \SilexBase\Application\CacheTrait
  */
-class CacheTraitTest extends TestCase
+class CacheTraitTest extends WebTestCase
 {
-    /**
-     * Instance of a Silex application.
-     */
-    protected $app;
-
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function createApplication()
     {
-        $this->app = new CacheAwareApplication();
+        return new CacheAwareApplication();
     }
 
     /**

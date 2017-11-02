@@ -26,7 +26,7 @@
 
 namespace SilexBase\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Silex\WebTestCase;
 use SilexBase\BaseUiApplication;
 use Twig_Environment;
 
@@ -40,19 +40,14 @@ use Twig_Environment;
  *
  * @see \SilexBase\BaseUiApplication
  */
-class BaseUiApplicationTest extends TestCase
+class BaseUiApplicationTest extends WebTestCase
 {
-    /**
-     * Instance of a Silex application.
-     */
-    protected $app;
-
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function createApplication()
     {
-        $this->app = new BaseUiApplication();
+        return new BaseUiApplication();
     }
 
     /**
