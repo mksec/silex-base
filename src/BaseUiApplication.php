@@ -96,7 +96,7 @@ class BaseUiApplication extends BaseApplication
      *
      * @return self
      */
-    public function enableProfiler(): self
+    public function enableProfiler()
     {
         /* Register the HttpFragmentServiceProvider, if it isn't already
          * registered. */
