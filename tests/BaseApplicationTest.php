@@ -75,7 +75,7 @@ class BaseApplicationTest extends WebTestCase
     }
 
     /**
-     * Check that the error handlers is available from outside.
+     * Check that the exception handlers is available from outside.
      */
     public function testExceptionHandler()
     {
@@ -84,5 +84,17 @@ class BaseApplicationTest extends WebTestCase
             ExceptionHandler::class,
             $this->app['core.exception_handler']
         );
+    }
+
+    /**
+     * Check the exception handler can be told to route events back to Silex.
+     *
+     * NOTICE: This test can't check, if events will be routed back, but it'll
+     *         check no errors happening on calling the method.
+     */
+    public function testCatchAllExceptions()
+    {
+        $this->app->catchAllExceptions();
+        $this->assertTrue(true);
     }
 }

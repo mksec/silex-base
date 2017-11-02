@@ -54,6 +54,10 @@ classes.
   with the `core.error_handler` and `core.exception_handler` keys, e.g. to set a
   custom exception handler returning the error 500 page.
 
+  You can use the `catchAllExceptions()` method to tell the `ExceptionHandler`
+  to route exception events to the Silex event handlers. Please read the docs
+  before using this method!
+
 * `BaseUiApplication`
 
   The `BaseUiApplication` extends the `BaseApplication` with the Twig and Asset
