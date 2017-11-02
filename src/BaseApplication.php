@@ -60,8 +60,9 @@ class BaseApplication extends Application
          * NOTICE: By default, the exception handler will be used without debug
          *         output. Developers need to create a new Application object
          *         'debug' set to true in $values to enable this feature. */
-        ErrorHandler::register();
-        ExceptionHandler::register($values['debug'] ?? false);
+        $this['core.error_handler'] = ErrorHandler::register();
+        $this['core.exception_handler'] =
+            ExceptionHandler::register($values['debug'] ?? false);
 
         /* Initialize the Silex Application class. Predefined values will be
          * passed to its constructor to setup the application. */

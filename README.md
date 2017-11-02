@@ -45,6 +45,15 @@ classes.
   ExceptionHandler registered. It may be used for simple applications without an
   UI (e.g. APIs).
 
+  **Notice:** The exception handler of Silex will catch all exceptions while
+  handling a request. In addition, the `ErrorHandler` will convert any errors
+  and warnings (e.g. reading from a non-existing file) to exceptions, that will
+  be handled by the same exception handler of Silex. However, Silex doesn't
+  catch fatal exceptions (e.g. `ClassNotFoundException`) or exceptions thrown
+  outside a running controller. You can access the Error- and ExceptionHandler
+  with the `core.error_handler` and `core.exception_handler` keys, e.g. to set a
+  custom exception handler returning the error 500 page.
+
 * `BaseUiApplication`
 
   The `BaseUiApplication` extends the `BaseApplication` with the Twig and Asset

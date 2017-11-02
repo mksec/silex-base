@@ -26,8 +26,10 @@
 
 namespace SilexBase\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Silex\WebTestCase;
 use SilexBase\BaseApplication;
+use Symfony\Component\Debug\ErrorHandler;
+use Symfony\Component\Debug\ExceptionHandler;
 
 /**
  * Test the `BaseApplication`.
@@ -39,14 +41,48 @@ use SilexBase\BaseApplication;
  *
  * @see \SilexBase\BaseApplication
  */
-class BaseApplicationTest extends TestCase
+class BaseApplicationTest extends WebTestCase
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function createApplication()
+    {
+        return new BaseApplication();
+    }
+
     /**
      * Check that provided values will be passed to the base Silex Applicaton.
      */
     public function testPassedValues()
     {
+        /* As we need to pass arguments to the constructor, we can't use the
+         * default application instance. */
         $app = new BaseApplication(['foo' => 'bar']);
         $this->assertEquals($app['foo'], 'bar');
+    }
+
+    /**
+     * Check that the error handlers is available from outside.
+     */
+    public function testErrorHandler()
+    {
+        $this->assertArrayHasKey('core.error_handler', $this->app);
+        $this->assertInstanceOf(
+            ErrorHandler::class,
+            $this->app['core.error_handler']
+        );
+    }
+
+    /**
+     * Check that the error handlers is available from outside.
+     */
+    public function testExceptionHandler()
+    {
+        $this->assertArrayHasKey('core.exception_handler', $this->app);
+        $this->assertInstanceOf(
+            ExceptionHandler::class,
+            $this->app['core.exception_handler']
+        );
     }
 }
