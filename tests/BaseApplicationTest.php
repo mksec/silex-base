@@ -26,10 +26,13 @@
 
 namespace SilexBase\Tests;
 
+use Exception;
 use Silex\WebTestCase;
 use SilexBase\BaseApplication;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Test the `BaseApplication`.
@@ -89,12 +92,56 @@ class BaseApplicationTest extends WebTestCase
     /**
      * Check the exception handler can be told to route events back to Silex.
      *
-     * NOTICE: This test can't check, if events will be routed back, but it'll
-     *         check no errors happening on calling the method.
+     * This test checks the routing back to Silex with an empty response.
      */
-    public function testCatchAllExceptions()
+    public function testCatchAllExceptionsEmptyResponse()
     {
+        /* Register a new error handler, that will set a flag to true if been
+         * called. The error code passed to the handler should be 500, as it
+         * will be triggered from the exception below. */
+        $flag = false;
+        $this->app->error(
+            function (Exception $e, Request $request, $code) use (&$flag) {
+                $this->assertEquals(500, $code);
+                $flag = true;
+            }
+        );
+
+        /* Pass a new exception to the exception handler and check if the flag
+         * is set after handling. If not, the exception was not send back to the
+         * application. */
         $this->app->catchAllExceptions();
-        $this->assertTrue(true);
+        $this->app['core.exception_handler']->handle(new Exception());
+        $this->assertTrue($flag);
+
+        /* The exception handler should output a default HTML error page. */
+        $this->expectOutputRegex('/DOCTYPE html/');
+        ob_end_flush();
+    }
+
+    /**
+     * Check the exception handler can be told to route events back to Silex.
+     *
+     * This test checks the routing back to Silex with a simple response.
+     */
+    public function testCatchAllExceptionsWithResponse()
+    {
+        /* Register a new error handler, that will return a simple response. The
+         * error code passed to the handler should be 500, as it will be
+         * triggered from the exception below. */
+        $this->app->error(
+            function (Exception $e, Request $request, $code) {
+                $this->assertEquals(500, $code);
+
+                return new Response('exception handler');
+            }
+        );
+
+        /* Pass a new exception to the exception handler and check if the
+         * response returned from the error handler will be returned. */
+        $this->app->catchAllExceptions();
+        $this->app['core.exception_handler']->handle(new Exception());
+        $this->expectOutputRegex('/^exception handler$/');
+        ob_end_flush();
     }
 }
