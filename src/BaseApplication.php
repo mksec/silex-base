@@ -117,10 +117,11 @@ class BaseApplication extends Application
              * client. The status-code will be overridden to error 500. If no
              * error handler returned a proper response, these calls will fail
              * and the ExceptionHandler will print its default error page. */
-            $event->getResponse()
-                  ->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)
-                  ->sendHeaders()
-                  ->sendContent();
+            if ($response = $event->getResponse()) {
+                $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)
+                         ->sendHeaders()
+                         ->sendContent();
+            }
         });
 
         return $this;
