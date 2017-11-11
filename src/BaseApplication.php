@@ -103,11 +103,13 @@ class BaseApplication extends Application
              * dispatch it.
              *
              * NOTICE: If the exception is thrown outside a running controller,
-             *         the request will be empty. For API compatiblity an empty
-             *         Request will be passed in this case. */
+             *         the request will be empty. For API compatiblity a new
+             *         Request will be created from the globals and passed in
+             *         this case. */
             $event = new GetResponseForExceptionEvent(
                 $this,
-                $this['request_stack']->getCurrentRequest() ?? new Request(),
+                $this['request_stack']->getCurrentRequest()
+                    ?? Request::createFromGlobals(),
                 HttpKernelInterface::MASTER_REQUEST,
                 $e
             );
