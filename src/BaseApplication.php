@@ -62,7 +62,7 @@ class BaseApplication extends Application
      */
     public static function enableConsoleMode()
     {
-        self::$consoleMode = true;
+        static::$consoleMode = true;
     }
 
     /**
