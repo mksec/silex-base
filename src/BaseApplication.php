@@ -45,6 +45,27 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class BaseApplication extends Application
 {
     /**
+     * Wheter this application runs in console mode or not.
+     *
+     *
+     * @var bool
+     */
+    protected static $consoleMode = false;
+
+    /**
+     * Enable console mode for the application.
+     *
+     * If the application is used in console applications (e.g. the doctrine
+     * tools, PHPUnit, ...), the Application needs to be aware of it. E.g. the
+     * error- and exception handler must not be registered to not convert
+     * exceptions to HTML pages.
+     */
+    public static function enableConsoleMode()
+    {
+        self::$consoleMode = true;
+    }
+
+    /**
      * {@inheritdoc}
      *
      * NOTICE: By default, the exception handler will *NOT* print any debug
@@ -66,9 +87,11 @@ class BaseApplication extends Application
          * NOTICE: By default, the exception handler will be used without debug
          *         output. Developers need to create a new Application object
          *         'debug' set to true in $values to enable this feature. */
-        $this['core.error_handler'] = ErrorHandler::register();
-        $this['core.exception_handler'] =
-            ExceptionHandler::register($values['debug'] ?? false);
+        if (!self::$consoleMode) {
+            $this['core.error_handler'] = ErrorHandler::register();
+            $this['core.exception_handler'] =
+                ExceptionHandler::register($values['debug'] ?? false);
+        }
 
         /* Initialize the Silex Application class. Predefined values will be
          * passed to its constructor to setup the application. */

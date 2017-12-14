@@ -144,4 +144,16 @@ class BaseApplicationTest extends WebTestCase
         $this->expectOutputRegex('/^exception handler$/');
         ob_end_flush();
     }
+
+    /**
+     * Check if the constructor pays attention to the console mode.
+     */
+    public function testConsoleMode()
+    {
+        BaseApplication::enableConsoleMode();
+        $app = new BaseApplication();
+
+        $this->assertArrayNotHasKey('core.error_handler', $app);
+        $this->assertArrayNotHasKey('core.exception_handler', $app);
+    }
 }
